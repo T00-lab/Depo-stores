@@ -42,7 +42,6 @@
             font-weight: bold;
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
         .tab-btn.active {
             background-color: #d4af37;
@@ -100,9 +99,6 @@
             text-decoration: none;
             display: inline-block;
         }
-        .order-btn:hover {
-            background-color: #20ba5a;
-        }
         .empty-notice {
             text-align: center;
             color: #777;
@@ -144,9 +140,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .close-btn:hover {
-            color: #fff;
-        }
         .modal-title {
             color: #d4af37;
             font-size: 1.2rem;
@@ -186,9 +179,6 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .submit-btn:hover {
-            background-color: #c59b27;
-        }
         .bank-details {
             background-color: #2a2a2a;
             padding: 12px;
@@ -210,3 +200,174 @@
         <p>Handcrafted Custom Shoes & Luxury Collection</p>
     </header>
 
+    <!-- Category Selector Tabs -->
+    <div class="category-tabs">
+        <button class="tab-btn active" onclick="switchCategory('shoes', event)">Shoes Collection</button>
+        <button class="tab-btn" onclick="switchCategory('bags', event)">Leather Bags</button>
+    </div>
+
+    <!-- Shoes Section -->
+    <div id="shoes-section" class="catalog-section active">
+        <div class="catalog-grid">
+            <!-- 1. Black Male Easy Wear -->
+            <div class="product-card">
+                <img src="Black male easy wear.jpg.PNG" alt="Depo Black Male Easy Wear">
+                <h3>Black Male Easy Wear</h3>
+                <div class="price">₦20,000</div>
+                <button class="order-btn" onclick="openOrderModal('Black Male Easy Wear', '₦20,000')">Order Now</button>
+            </div>
+
+            <!-- 2. Black Easy Wear -->
+            <div class="product-card">
+                <img src="Black-easy-wear.jpg.JPG" alt="Depo Black Easy Wear">
+                <h3>Black Easy Wear</h3>
+                <div class="price">₦15,000</div>
+                <button class="order-btn" onclick="openOrderModal('Black Easy Wear', '₦15,000')">Order Now</button>
+            </div>
+
+            <!-- 3. Boss Louis Vuitton -->
+            <div class="product-card">
+                <img src="Boss-Louis-Vuitton.jpg.JPG" alt="Depo Boss Louis Vuitton Sandal">
+                <h3>Boss Louis Vuitton</h3>
+                <div class="price">₦10,000</div>
+                <button class="order-btn" onclick="openOrderModal('Boss Louis Vuitton', '₦10,000')">Order Now</button>
+            </div>
+
+            <!-- 4. H White Bottom -->
+            <div class="product-card">
+                <img src="H-white bottom.jpg.PNG" alt="Depo H White Bottom">
+                <h3>H White Bottom</h3>
+                <div class="price">₦18,000</div>
+                <button class="order-btn" onclick="openOrderModal('H White Bottom', '₦18,000')">Order Now</button>
+            </div>
+
+            <!-- 5. Hand-Made Easy Wear -->
+            <div class="product-card">
+                <img src="Hand-made-easy-wear.jpg.JPG" alt="Depo Hand-Made Easy Wear">
+                <h3>Hand-Made Easy Wear</h3>
+                <div class="price">₦25,000</div>
+                <button class="order-btn" onclick="openOrderModal('Hand-Made Easy Wear', '₦25,000')">Order Now</button>
+            </div>
+
+            <!-- 6. White Dior Pam Slippers -->
+            <div class="product-card">
+                <img src="White-Dior-Pam-slippers.jpg.JPG" alt="Depo White Dior Pam Slippers">
+                <h3>White Dior Pam Slippers</h3>
+                <div class="price">₦20,000</div>
+                <button class="order-btn" onclick="openOrderModal('White Dior Pam Slippers', '₦20,000')">Order Now</button>
+            </div>
+
+            <!-- 7. White Gucci -->
+            <div class="product-card">
+                <img src="White-Gucci.jpg.JPG" alt="Depo White Gucci Sandal">
+                <h3>White Gucci</h3>
+                <div class="price">₦18,000</div>
+                <button class="order-btn" onclick="openOrderModal('White Gucci', '₦18,000')">Order Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bags Section -->
+    <div id="bags-section" class="catalog-section">
+        <div class="empty-notice">
+            <p>👜 Leather Bags collection coming soon! Stay tuned.</p>
+        </div>
+    </div>
+
+    <!-- Checkout Modal Popup -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeOrderModal()">&times;</span>
+            
+            <!-- Step 1: Waybill Details Form -->
+            <div id="formView">
+                <h3 class="modal-title" id="modalProductTitle">Complete Your Order</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="custName" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="custPhone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label>Delivery / Waybill Address</label>
+                    <textarea id="custAddress" rows="3" placeholder="Enter your delivery address and state"></textarea>
+                </div>
+                <button class="submit-btn" onclick="proceedToPayment()">Proceed to Payment</button>
+            </div>
+
+            <!-- Step 2: Bank Details & WhatsApp Submission -->
+            <div id="paymentView" style="display: none;">
+                <h3 class="modal-title">Payment & Transfer</h3>
+                <div class="bank-details">
+                    <strong>Bank:</strong> ZENITH BANK<br>
+                    <strong>Account Number:</strong> 2432014835<br>
+                    <strong>Account Name:</strong> Depo Footwear & Leather<br>
+                    <strong>Amount:</strong> <span id="modalProductPrice"></span>
+                </div>
+                <p style="font-size: 0.8rem; color: #aaa; text-align: center; margin-bottom: 15px;">
+                    Make your transfer, then click below to send your payment slip and delivery details via WhatsApp.
+                </p>
+                <button class="submit-btn" style="background-color: #25D366; color: #fff;" onclick="sendToWhatsApp()">Send Payment Proof via WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedProduct = '';
+        let selectedPrice = '';
+
+        function switchCategory(category, event) {
+            document.getElementById('shoes-section').classList.remove('active');
+            document.getElementById('bags-section').classList.remove('active');
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(category + '-section').classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function openOrderModal(productName, productPrice) {
+            selectedProduct = productName;
+            selectedPrice = productPrice;
+            document.getElementById('modalProductTitle').innerText = 'Order: ' + productName + ' (' + productPrice + ')';
+            document.getElementById('formView').style.display = 'block';
+            document.getElementById('paymentView').style.display = 'none';
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function proceedToPayment() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('Please fill in all your delivery details before proceeding.');
+                return;
+            }
+
+            document.getElementById('modalProductPrice').innerText = selectedPrice;
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('paymentView').style.display = 'block';
+        }
+
+        function sendToWhatsApp() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            const message = `Hello Depo Footwear,\n\nI have made payment for my order. Here are my details:\n\n*Product:* ${selectedProduct} (${selectedPrice})\n*Name:* ${name}\n*Phone:* ${phone}\n*Delivery Address:* ${address}\n\n[Attached is my payment slip]`;
+            
+            const whatsappUrl = `https://wa.me/message/R7CRQOE6755M1?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>
