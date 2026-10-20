@@ -10,59 +10,61 @@
             background-color: #121212;
             color: #ffffff;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
         }
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         header h1 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #d4af37;
         }
         header p {
             color: #aaaaaa;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
+        /* Two columns grid setup */
         .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            max-width: 600px;
             margin: 0 auto;
         }
         .product-card {
             background-color: #1e1e1e;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             border: 1px solid #333333;
             text-align: center;
-            padding-bottom: 20px;
+            padding-bottom: 12px;
         }
         .product-card img {
             width: 100%;
-            height: 320px;
+            height: 160px;
             object-fit: cover;
         }
         .product-card h3 {
-            font-size: 1.1rem;
-            margin: 15px 10px 5px 10px;
+            font-size: 0.9rem;
+            margin: 10px 5px 4px 5px;
+            color: #ffffff;
         }
         .price {
             color: #d4af37;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .order-btn {
             background-color: #25D366;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 0.95rem;
+            padding: 7px 12px;
+            font-size: 0.8rem;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
@@ -70,24 +72,97 @@
         .order-btn:hover {
             background-color: #20ba5a;
         }
-        .payment-section {
-            max-width: 600px;
-            margin: 50px auto 20px auto;
+
+        /* Modal Popup Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .modal-content {
             background-color: #1e1e1e;
             border: 1px solid #333333;
             border-radius: 10px;
             padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #fff;
+        }
+        .modal-title {
+            color: #d4af37;
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 15px;
             text-align: center;
         }
-        .payment-section h2 {
-            color: #d4af37;
-            font-size: 1.4rem;
-            margin-top: 0;
+        .form-group {
+            margin-bottom: 12px;
+            text-align: left;
         }
-        .payment-section p {
-            color: #cccccc;
-            font-size: 0.95rem;
-            line-height: 1.5;
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-bottom: 4px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #d4af37;
+            color: #121212;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #c59b27;
+        }
+        .bank-details {
+            background-color: #2a2a2a;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-align: left;
+        }
+        .bank-details strong {
+            color: #d4af37;
         }
     </style>
 </head>
@@ -104,7 +179,7 @@
             <img src="Black male easy wear.jpg.PNG" alt="Depo Black Male Easy Wear">
             <h3>Black Male Easy Wear</h3>
             <div class="price">₦20,000</div>
-            <a href="https://wa.me/message/R7CRQOE6755M1?text=Hello%2C%20I%20want%20to%20order%20the%20Black%20Male%20Easy%20Wear" class="order-btn" target="_blank">Order via WhatsApp</a>
+            <button class="order-btn" onclick="openOrderModal('Black Male Easy Wear', '₦20,000')">Order Now</button>
         </div>
 
         <!-- 2. Black Easy Wear -->
@@ -112,7 +187,7 @@
             <img src="Black-easy-wear.jpg.JPG" alt="Depo Black Easy Wear">
             <h3>Black Easy Wear</h3>
             <div class="price">₦15,000</div>
-            <a href="https://wa.me/message/R7CRQOE6755M1? text=Hello%2C%20I%20want%20to%20order%20the%20Black%20Easy%20Wear" class="order-btn" target="_blank">Order via WhatsApp</a>
+            <button class="order-btn" onclick="openOrderModal('Black Easy Wear', '₦15,000')">Order Now</button>
         </div>
 
         <!-- 3. Boss Louis Vuitton -->
@@ -120,7 +195,7 @@
             <img src="Boss-Louis-Vuitton.jpg.JPG" alt="Depo Boss Louis Vuitton Sandal">
             <h3>Boss Louis Vuitton</h3>
             <div class="price">₦10,000</div>
-            <a href="https://wa.me/message/R7CRQOE6755M1? text=Hello%2C%20I%20want%20to%20order%20the%20Boss%20Louis%20Vuitton" class="order-btn" target="_blank">Order via WhatsApp</a>
+            <button class="order-btn" onclick="openOrderModal('Boss Louis Vuitton', '₦10,000')">Order Now</button>
         </div>
 
         <!-- 4. H White Bottom -->
@@ -128,7 +203,7 @@
             <img src="H-white bottom.jpg.PNG" alt="Depo H White Bottom">
             <h3>H White Bottom</h3>
             <div class="price">₦18,000</div>
-            <a href="https://wa.me/message/R7CRQOE6755M1? text=Hello%2C%20I%20want%20to%20order%20the%20H%20White%20Bottom" class="order-btn" target="_blank">Order via WhatsApp</a>
+            <button class="order-btn" onclick="openOrderModal('H White Bottom', '₦18,000')">Order Now</button>
         </div>
 
         <!-- 5. Hand-Made Easy Wear -->
@@ -136,7 +211,7 @@
             <img src="Hand-made-easy-wear.jpg.JPG" alt="Depo Hand-Made Easy Wear">
             <h3>Hand-Made Easy Wear</h3>
             <div class="price">₦25,000</div>
-            <a href="https://wa.me/message/R7CRQOE6755M1? text=Hello%2C%20I%20want%20to%20order%20the%20Hand-Made%20Easy%20Wear" class="order-btn" target="_blank">Order via WhatsApp</a>
+            <button class="order-btn" onclick="openOrderModal('Hand-Made Easy Wear', '₦25,000')">Order Now</button>
         </div>
 
         <!-- 6. White Dior Pam Slippers -->
@@ -144,7 +219,7 @@
             <img src="White-Dior-Pam-slippers.jpg.JPG" alt="Depo White Dior Pam Slippers">
             <h3>White Dior Pam Slippers</h3>
             <div class="price">₦20,000</div>
-            <a href="https://wa.me/message/R7CRQOE6755M1? text=Hello%2C%20I%20want%20to%20order%20the%20White%20Dior%20Pam%20Slippers" class="order-btn" target="_blank">Order via WhatsApp</a>
+            <button class="order-btn" onclick="openOrderModal('White Dior Pam Slippers', '₦20,000')">Order Now</button>
         </div>
 
         <!-- 7. White Gucci -->
@@ -152,20 +227,82 @@
             <img src="White-Gucci.jpg.JPG" alt="Depo White Gucci Sandal">
             <h3>White Gucci</h3>
             <div class="price">₦18,000</div>
-            <a href="https://wa.me/message/R7CRQOE6755M1? text=Hello%2C%20I%20want%20to%20order%20the%20White%20Gucci" class="order-btn" target="_blank">Order via WhatsApp</a>
+            <button class="order-btn" onclick="openOrderModal('White Gucci', '₦18,000')">Order Now</button>
         </div>
     </div>
 
-    <!-- Payment & Account Details Section -->
-    <div class="payment-section">
-        <h2>Payment & Bank Details</h2>
-        <p>
-            <strong>Bank Name:</strong> ZENITH BANK<br>
-            <strong>Account Number:</strong> 2432014835<br>
-            <strong>Account Name:</strong> Depo Footwear & Leather<br><br>
-            <em>Please send your payment proof and delivery address via WhatsApp after ordering!</em>
-        </p>
+    <!-- Checkout Modal Popup -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeOrderModal()">&times;</span>
+            
+            <!-- Step 1: Waybill Details Form -->
+            <div id="formView">
+                <h3 class="modal-title" id="modalProductTitle">Complete Your Order</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="custName" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="custPhone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label>Delivery / Waybill Address</label>
+                    <textarea id="custAddress" rows="3" placeholder="Enter your delivery address and state"></textarea>
+                </div>
+                <button class="submit-btn" onclick="proceedToPayment()">Proceed to Payment</button>
+            </div>
+
+            <!-- Step 2: Bank Details & WhatsApp Submission -->
+            <div id="paymentView" style="display: none;">
+                <h3 class="modal-title">Payment & Transfer</h3>
+                <div class="bank-details">
+                    <strong>Bank:</strong> ZENITH BANK<br>
+                    <strong>Account Number:</strong> 2432014835<br>
+                    <strong>Account Name:</strong> Depo Footwear & Leather<br>
+                    <strong>Amount:</strong> <span id="modalProductPrice"></span>
+                </div>
+                <p style="font-size: 0.8rem; color: #aaa; text-align: center; margin-bottom: 15px;">
+                    Make your transfer, then click below to send your payment slip and delivery details via WhatsApp.
+                </p>
+                <button class="submit-btn" style="background-color: #25D366; color: #fff;" onclick="sendToWhatsApp()">Send Payment Proof via WhatsApp</button>
+            </div>
+        </div>
     </div>
 
-</body>
-</html>
+    <script>
+        let selectedProduct = '';
+        let selectedPrice = '';
+
+        function openOrderModal(productName, productPrice) {
+            selectedProduct = productName;
+            selectedPrice = productPrice;
+            document.getElementById('modalProductTitle').innerText = 'Order: ' + productName + ' (' + productPrice + ')';
+            document.getElementById('formView').style.display = 'block';
+            document.getElementById('paymentView').style.display = 'none';
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function proceedToPayment() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('Please fill in all your delivery details before proceeding.');
+                return;
+            }
+
+            document.getElementById('modalProductPrice').innerText = selectedPrice;
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('paymentView').style.display = 'block';
+        }
+
+        function sendToWhatsApp() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById
